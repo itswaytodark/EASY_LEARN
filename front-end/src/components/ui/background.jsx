@@ -2,7 +2,7 @@ import React from 'react';
 
 const Background = () => {
   return (
-     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-gray-950 text-white font-inter">
+     <div className="relative flex h-96 items-center justify-center overflow-hidden bg-gray-950 text-white font-inter">
 
       {/* Glowing Gradient Background Elements */}
       {/* Glow 1: Top-left purple/blue */}
