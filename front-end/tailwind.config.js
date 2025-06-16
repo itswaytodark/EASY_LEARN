@@ -5,9 +5,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        marcellus: ['Marcellus', 'serif'],
-      },
+  
     },
   },
   plugins: [],
