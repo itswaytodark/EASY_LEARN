@@ -19,6 +19,7 @@ html, body, #root {
 }
 
 @theme inline {
+  --font-marcellus: Marcellus;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -57,6 +58,7 @@ html, body, #root {
 }
 
 :root {
+  
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -92,7 +94,7 @@ html, body, #root {
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: oklch(0% 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);

@@ -1,69 +1,55 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom";
-
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import Login_btn from "./ui/login_btn";
 
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/10 backdrop-blur-md border-b border-white/20 shadow-sm z-50 flex items-center px-6  ">
+    <nav className="fixed top-0 left-0 w-full bg-black/10 backdrop-blur-md border-b border-gray-500 shadow-sm z-50 flex items-center px-6 py-4">
       
       <Link to="/">
-        <h1 className="text-3xl font-extralight pointer">
+        <h1 className="text-3xl font-extralight">
           EASY LEARN
         </h1>
       </Link>
 
-      <ul className="flex  text-lg w-full justify-center">
-        <li className="hover:text-gray-400 transition-colors text-lg px-5">
+      
+      <Button
+        variant="ghost"
+        size="icon"
+        aria-label="Toggle Menu"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="md:hidden ml-auto"
+      >
+        {isOpen ? <X size={26} /> : <Menu size={26} />}
+      </Button>
+
+      
+      <ul
+        className={`flex flex-col md:flex-row items-center justify-center flex-1 absolute md:static left-0 top-16 md:top-0 p-6 md:p-0 w-full md:w-auto bg-gray-900 md:bg-transparent transition-all duration-500 ease-in-out ${
+          isOpen ? "flex" : "hidden md:flex"
+        }`}
+      >
+        <li className="hover:text-gray-400 transition-colors px-5 py-2">
           <Link to="/">Home</Link>
         </li>
-        <li className="hover:text-gray-400 transition-colors text-lg px-5">
-          <Link to="/store">Courses</Link>
+        <li className="hover:text-gray-400 transition-colors px-5 py-2">
+          <Link to="/Courses">Courses</Link>
         </li>
-        <li className="hover:text-gray-400 transition-colors text-lg px-5">
-          <Link to="/about">AI Teacher</Link>
+        <li className="hover:text-gray-400 transition-colors px-5 py-2">
+          <Link to="/AITeacher">AI Teacher</Link>
         </li>
-        <li className="hover:text-gray-400 transition-colors text-lg px-5">
-          <Link to="/about">About Us</Link>
+        <li className="hover:text-gray-400 transition-colors px-5 py-2">
+          <Link to="/AboutUs">About Us</Link>
         </li>
       </ul>
 
       
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline" >
-            Login
-          </Button>
-        </DialogTrigger>
+      <Login_btn/>
 
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Login</DialogTitle>
-          </DialogHeader>
-
-          
-          <input
-            type="text"
-            placeholder="Name"
-            className="w-full p-2 mb-4 rounded-md"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full p-2 mb-4 rounded-md"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="w-full p-2 mb-4 rounded-md"
-          />
-          <Button variant="secondary" className="w-full">
-            Sign in
-          </Button>
-
-
-        </DialogContent>
-      </Dialog>
     </nav>
   )
 }
