@@ -8,7 +8,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black/10 backdrop-blur-md border-b border-gray-500 shadow-sm z-50 flex items-center px-6 py-4">
+    <nav className="fixed top-0 left-0 w-full bg-black/10 backdrop-blur-md border-b border-neutral-900 shadow-sm z-50 flex items-center px-6 py-4">
       
       <Link to="/">
         <h1 className="text-3xl font-extralight">
@@ -29,7 +29,8 @@ function Navbar() {
 
       
       <ul
-        className={`flex flex-col md:flex-row items-center justify-center flex-1 absolute md:static left-0 top-16 md:top-0 p-6 md:p-0 w-full md:w-auto bg-gray-900 md:bg-transparent transition-all duration-500 ease-in-out ${
+        className={`flex flex-col md:flex-row items-center justify-center flex-1 absolute md:static left-0 top-16 md:top-0 p-6 md:p-0 w-full md:w-auto bg-gray-900 md:bg-transparent transition-all duration-500 ease-in-out 
+        ${
           isOpen ? "flex" : "hidden md:flex"
         }`}
       >
