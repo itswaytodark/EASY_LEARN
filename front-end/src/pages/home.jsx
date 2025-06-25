@@ -32,7 +32,7 @@ function Home() {
           </Link>
 
 
-          <div className="mt-20 flex flex-col md:flex-row gap-8 justify-center items-center text-white">
+          <div className="mt-20 flex gap-8 justify-center items-center text-white">
             <div className="flex flex-col items-center">
               <GraduationCap className="w-10 h-10 mb-2 text-emerald-400" />
               <p className="text-2xl font-bold">12,000+</p>
@@ -79,18 +79,30 @@ function Home() {
               </p>
             </div>
           </div>
+
+          <div className="flex items-center justify-start px-7 mt-14">
+
+            <h1 className="text-orange-200/80 font-bold sm:text-9xl text-4xl text-start border-l-8 border-violet-600 pl-6">
+              WE DELIVER WHAT <br /> WE OFFER 🍑
+            </h1>
+
+          </div>
+
+          <div className=" mt-14 w-full flex justify-center">
+              <iframe width="1000" height="500" src="https://www.youtube.com/embed/fo6hLNGtE-Q?si=0tmlLFxlxxEIPUI2" title="YouTube video player" frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+
         </div>
       </div>
 
 
-      <div className="flex items-center justify-start px-7">
-
-      <h1 className="text-white/80 font-bold text-9xl border-l-8 border-violet-600 pl-6">
-          WE DELIVER WHAT <br /> WE OFFER 🍑
-      </h1>
+    
 
 
-      </div>
+
 
 
 
