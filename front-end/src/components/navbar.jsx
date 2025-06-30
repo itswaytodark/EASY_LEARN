@@ -8,7 +8,7 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black/10 backdrop-blur-md border-b border-neutral-900 shadow-sm z-50 flex items-center px-6 py-4">
+    <nav className=" fixed w-full bg-black/10 backdrop-blur-md border-b border-neutral-900 shadow-sm z-50 flex items-center px-6 py-4">
       
       <Link to="/">
         <div className="flex gap-2 items-center">
