@@ -1,6 +1,6 @@
 import Background from "@/components/ui/background";
 
-const Courses = () => {
+const About_us_page = () => {
     return (
         <div className="relative w-full min-h-screen overflow-hidden">
             
@@ -10,10 +10,12 @@ const Courses = () => {
 
             {/* Main content overlays on top */}
             <div className="relative z-10 pt-32 flex justify-center">
-                <h1 className="text-5xl font-bold text-white">Courses</h1>
+                <h1 className="text-5xl font-bold text-white">
+                    About Us
+                </h1>
             </div>
         </div>
     );
 };
 
-export default Courses;
+export default About_us_page;

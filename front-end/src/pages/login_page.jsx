@@ -1,12 +1,14 @@
-import Background from "../components/ui/background";
-import { Card, CardContent } from "../components/ui/card";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
-import { useState } from "react";
+import Background from "../components/ui/background"
+import { Card, CardContent } from "../components/ui/card"
+import { Input } from "../components/ui/input"
+import { Button } from "../components/ui/button"
+import { useState } from "react"
 
-function Login_page() {
-  const [loginData, setLoginData] = useState({ name:"", email: "", password: "" });
-  const [signupData, setSignupData] = useState({name:"", email: "", password: "" });
+const Login_page = () => {
+
+  const [loginData, setLoginData] = useState({ name:"", email: "", password: "" })
+  const [signupData, setSignupData] = useState({name:"", email: "", password: "" })
+
 
   const handleLogin = (e) => {
     e.preventDefault();

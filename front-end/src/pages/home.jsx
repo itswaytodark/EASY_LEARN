@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import Background from "../components/ui/background";
 import { GraduationCap, Users, Briefcase, Laptop, Clock, } from "lucide-react";
+import Courses_btn from "@/components/MyButton/Courses";
 
 function Home() {
   return (
@@ -19,17 +18,7 @@ function Home() {
           <p className="text-white font-light text-[20px] mb-6">AI teacher 😏</p>
 
 
-          <Link to="/login">
-            <Button
-              className="relative px-8 py-4 text-white text-lg font-semibold bg-white/15 backdrop-blur-md border 
-            border-white/20 rounded-xl transition-all duration-300 ease-in-out hover:bg-white/25 hover:shadow-lg 
-            hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Explore Courses
-            </Button>
-
-
-          </Link>
+          <Courses_btn/>
 
 
           <div className="mt-20 flex gap-8 justify-center items-center text-white">
