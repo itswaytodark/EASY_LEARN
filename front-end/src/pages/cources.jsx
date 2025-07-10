@@ -11,6 +11,13 @@ const Courses = () => {
             {/* Main content overlays on top */}
             <div className="relative z-10 pt-32 flex justify-center">
                 <h1 className="text-5xl font-bold text-white">Courses</h1>
+
+
+
+
+
+
+                
             </div>
         </div>
     );
