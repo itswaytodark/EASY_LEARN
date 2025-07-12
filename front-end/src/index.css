@@ -15,11 +15,11 @@ html, body, #root {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  /* font-family: 'Marcellus', serif;? */
+  
 }
 
 @theme inline {
-  --font-marcellus: Marcellus;
+  /* --font-marcellus: Marcellus; */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
