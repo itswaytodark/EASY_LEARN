@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom";
 const Login_btn = () => {
     return (
-        <div className="hidden md:flex ml-auto">
+        <div className=" md:flex ml-auto">
 
           <Link to='/login'>
           <Button

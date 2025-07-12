@@ -1,7 +1,9 @@
 import Background from "../components/ui/background";
 import { LucideBrainCircuit, LucideUploadCloud, LucideShoppingCart } from "lucide-react";
-
+import { Navigate, useNavigate } from "react-router-dom";
 function About_us_page() {
+
+  const navigate = useNavigate();
   const features = [
     {
       icon: <LucideUploadCloud className="w-8 h-8 text-indigo-400" />,
@@ -44,8 +46,9 @@ function About_us_page() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {features.map((item, index) => (
             <div
+              onClick={() => navigate('/courses')}
               key={index}
-              className="bg-white/5 border border-white/20 backdrop-blur-md rounded-xl p-6 text-center hover:bg-white/10 transition-all duration-200"
+              className="bg-white/5 border border-white/20 backdrop-blur-md rounded-xl p-6 text-center hover:bg-white/10"
             >
               <div className="mb-4 flex justify-center">{item.icon}</div>
               <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
