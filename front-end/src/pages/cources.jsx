@@ -1,6 +1,7 @@
 import { Card, CardContent } from "../components/ui/card";
 import Background from "../components/ui/background";
 import { MoveDown } from 'lucide-react';
+import { useNavigate,  } from "react-router-dom";
 const courses = [
   {
     title: "React for Beginners",
@@ -8,6 +9,7 @@ const courses = [
     image:
       "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80",
     price: "799",
+    id:'reactDetailPage'
   },
   {
     title: "Full Stack Web Dev",
@@ -15,6 +17,8 @@ const courses = [
     image:
       "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80",
     price: "1499",
+    id:'FullStackWebDevDetailPage'
+
   },
   {
     title: "AI with Python",
@@ -22,10 +26,21 @@ const courses = [
     image:
       "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=800&q=80",
     price: "1199",
+    id:'AIwithPythonDetailPage'
+
   },
 ];
 
+
+
+
+
+
 const Courses_page = () => {
+
+  
+  const navigate = useNavigate();
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden text-white">
       <div className="absolute inset-0 -z-10">
@@ -45,6 +60,7 @@ const Courses_page = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {courses.map((course, index) => (
         <Card
+        onClick={() => {navigate(`/Courses/${course.id}`)}}
         key={index}
         className="bg-white/5 border border-white/10 backdrop-blur-xl text-white shadow-md flex flex-col"
         >

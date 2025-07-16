@@ -11,11 +11,11 @@ function Home() {
 
         <div className="absolute inset-0 top-28 z-10 flex flex-col items-center text-center px-7">
 
-          <h1 className="text-6xl font-marcellus text-emerald-400 font ">WELCOME ARYAN</h1>
+          <h1 className="text-6xl  text-emerald-400  ">WELCOME ARYAN</h1>
           <p className="text-white font-extralight my-1 text-[20px]">
             Learn new skills effortlessly with your personal
           </p>
-          <p className="text-white font-light text-[20px] mb-6">AI teacher 😏</p>
+          <p className="text-white font-light text-[20px] mb-6">AI teacher.</p>
 
 
           <Courses_btn/>
@@ -72,7 +72,7 @@ function Home() {
           <div className="flex items-center justify-start px-7 mt-14">
 
             <h1 className="text-orange-200/80 font-bold sm:text-9xl text-4xl text-start border-l-8 border-violet-600 pl-6">
-              WE DELIVER WHAT <br /> WE OFFER 🍑
+              WE Teach WHAT <br /> WE Build 🌱
             </h1>
 
           </div>

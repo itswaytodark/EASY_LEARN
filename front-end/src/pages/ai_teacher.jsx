@@ -13,6 +13,7 @@ const Ai_teacher_page = () => {
                 <h1 className="text-5xl font-bold text-white">AI TEACHER</h1>
             </div>
         </div>
+        
     );
 };
 

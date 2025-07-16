@@ -1,6 +1,6 @@
 import Background from "../components/ui/background";
 import { LucideBrainCircuit, LucideUploadCloud, LucideShoppingCart } from "lucide-react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate,  } from "react-router-dom";
 function About_us_page() {
 
   const navigate = useNavigate();
