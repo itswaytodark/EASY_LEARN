@@ -19,7 +19,7 @@ export const register = async (req, res) => {
             return res.status(409).json({ success: false, message: 'User Already Exist' })
         }
 
-        const hashPassword = bcrypt.hash(password,10)
+        const hashPassword = await bcrypt.hash(password,10)
 
         const dbUser = new userModel({name, email, password:hashPassword})
         await dbUser.save()
@@ -53,19 +53,19 @@ export const login = async(req,res) => {
     }
 
     try{
-        const user = userModel.findOne({email})
+        const user = await userModel.findOne({email})
 
         if(!user){
         return res.status(400).json({ success: false, message: 'Invalid Email' })
         }
 
-        const isMatch = bcrypt.compare(password,user.password)
+        const isMatch = await bcrypt.compare(password,user.password)
 
         if(!isMatch){
         return res.status(400).json({ success: false, message: 'Invalid Password' })
         }
 
-        const token = jwt.sign({id: dbUser._id} , JWT_SECRET, {expiresIn:'7d'})
+        const token = jwt.sign({id: user._id} , JWT_SECRET, {expiresIn:'7d'})
 
         res.cookie('token', token , {
             httpOnly: true,
