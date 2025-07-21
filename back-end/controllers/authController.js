@@ -2,7 +2,7 @@ import userModel from "../Models/userModels.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import { JWT_SECRET, NODE_ENV } from "../config/envConfig.js"
-
+import {sendMail} from '../config/Nodemailer.js'
 
 export const register = async (req, res) => {
 
@@ -33,6 +33,27 @@ export const register = async (req, res) => {
             maxAge: 7 * 24 * 60 * 60 * 1000
 
         })
+
+        // WELOCME EMAIL
+        await sendMail(
+            dbUser.email,
+            `Welcome to EasyLearn! 🚀`, // Subject
+            `Hi ${dbUser.name},\n\nWelcome to EasyLearn! We're excited to have you on board.\nStart learning and sharing your knowledge today.\n\nWatch this quick intro: https://www.youtube.com/watch?v=WfmaLgt0328&list=RDWfmaLgt0328&start_radio=1`, // Text
+            `
+    <div style="font-family: Arial, sans-serif; padding: 10px;">
+        <h2>Welcome to EasyLearn, ${dbUser.name}! 🚀</h2>
+        <p>We're excited to have you on board.<br/>
+        Start learning and sharing your knowledge today.</p>
+        <p>
+            <a href="https://www.youtube.com/watch?v=WfmaLgt0328&list=RDWfmaLgt0328&start_radio=1" 
+               style="display:inline-block;padding:10px 20px;background:#4CAF50;color:white;text-decoration:none;border-radius:5px;">
+               Watch Introduction Video
+            </a>
+        </p>
+    </div>
+    `
+);
+
 
         return res.status(201).json({success:true , message: 'User Created'})
     }
