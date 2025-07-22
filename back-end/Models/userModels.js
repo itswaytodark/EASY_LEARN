@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
     email: {type:String, required:true, unique:true},
     password: {type:String, required:true},
     isAccountVerified: {type:Boolean, default:false},
+
+    verifyOtp:{type:String,default:''},
+    verifyOtpExpireAt:{type:Number,default:0}
+
 })
 
 const userModel = mongoose.model('user' , userSchema)

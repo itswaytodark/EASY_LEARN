@@ -120,3 +120,97 @@ export const logout = async(req,res) => {
         return res.status(500).json({ success: false, message: error.message })
     }
 }
+
+export const sendverifyOtp = async(req,res) => {
+    try{
+
+        const userId = req.user.id
+
+        const user = await userModel.findById(userId)
+
+        // console.log("Looking for userId:", req.user)
+        // console.log("User found:", user)
+        // console.log(userId)
+        
+        if(user.isAccountVerified){
+        return res.status(200).json({success:true , message: 'Account is Already Verified'})
+        }
+
+       const otp = String(Math.floor(1000 + Math.random() * 9000))
+
+       user.verifyOtp = otp
+       user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000
+
+       await user.save()
+
+       await sendMail(
+           user.email,
+           `VERIFY ACCOUNT OTP Code 🔐`,
+
+           // Text version (fallback)
+           `Hi ${user.name},
+            Your OTP is: ${otp}
+            Please do not share it with anyone.
+            Thanks,
+            The EasyLearn Team`,
+
+           // HTML version
+`<div style="font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; color: #333;">
+        <h2 style="color: #4CAF50;">VERIFY ACCOUNT OTP Code 🔐</h2>
+        <p>Hi ${user.name},</p>
+        <p>Your OTP is:</p>
+        <p style="font-size: 24px; font-weight: bold; color: #4CAF50;">${otp}</p>
+       <br/>
+        Please do not share it with anyone for security reasons.</p>
+        <p style="margin-top:20px;">Thanks,<br/>The EasyLearn Team</p>
+    </div>`);
+
+        return res.status(201).json({success:true , message: 'Verification OTP Sent on Email'})
+
+    }
+    catch(error)
+    {
+        return res.status(500).json({ success: false, message: error.message })
+    }
+}
+
+
+export const verifyEmail = async(req,res) => {
+
+    const userId = req.user.id 
+    const { otp } = req.body
+
+    if(!otp){
+
+        return res.status(400).json({ success: false, message: 'OTP is required' })
+    }
+
+    try{
+
+        const user = await userModel.findById(userId)
+
+        if(!user){
+        return res.status(400).json({ success: false, message: 'User Not Found' })
+        }
+
+        if(user.verifyOtpExpireAt < Date.now()){
+         return res.status(400).json({ success: false, message: 'Expired OTP' })
+        }
+
+        if (user.verifyOtp !== otp) {
+        return res.status(400).json({ success: false, message: 'Invalid OTP' })
+        }
+
+        user.isAccountVerified = true
+        user.verifyOtp = ''
+        user.verifyOtpExpireAt = 0
+
+      await user.save()
+
+        return res.status(201).json({success:true , message: 'EMAIL Verified Successfully'})
+    }
+    catch(error)
+    {
+        return res.status(500).json({ success: false, message: error.message })
+    }
+}
