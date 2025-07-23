@@ -1,7 +1,7 @@
 import userModel from "../Models/userModels.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { JWT_SECRET, NODE_ENV } from "../config/envConfig.js"
+import { BASE_URL, JWT_SECRET, NODE_ENV } from "../config/envConfig.js"
 import {sendMail} from '../config/Nodemailer.js'
 
 export const register = async (req, res) => {
@@ -213,4 +213,72 @@ export const verifyEmail = async(req,res) => {
     {
         return res.status(500).json({ success: false, message: error.message })
     }
+}
+
+export const forgotPassword = async(req,res) =>  {
+7
+    const {email} = req.body
+
+    try{
+        const user = await userModel.findOne({email})
+
+        if(!user){
+        return res.status(400).json({ success: false, message: 'EMAIL Not Found' })
+        }
+
+        const token = jwt.sign({id:user._id}, JWT_SECRET , {expiresIn:'10m'} )
+
+        const resetLink = `${BASE_URL + '/reset-password/' + token }`
+
+        await sendMail(
+            user.email,
+            "Reset Your Password 🔐",
+            '',
+            `
+    <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #333;">
+      <p>Hi ${user.name},</p>
+      <p>We received a request to reset your password.</p>
+      <p>
+        <a href="${resetLink}" style="background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; margin: 25px , 25px; border-radius: 5px;">
+          Reset Password
+        </a>
+      </p>
+      <p>This link is valid for 15 minutes.</p>
+      <p>If you didn't request this, feel free to ignore it.</p>
+    </div>`);
+
+    res.status(201).json({success:true , message: 'Reset link sent to your email.'})
+    }
+    catch(error){
+        return res.status(500).json({ success: false, message: error.message })
+    }
+}
+
+export const resetPassword = async(req,res) => {
+
+    const {token} = req.params
+    const {newPassword} = req.body
+
+    try{
+        const tokenDecode = jwt.verify(token , JWT_SECRET)
+        const user = await userModel.findById(tokenDecode.id)
+
+        if(!user)
+        {
+            return res.status(400).json({ message: "User not found" });
+        }
+
+        const hashPassword = await bcrypt.hash(newPassword , 10)
+
+        user.password = hashPassword
+
+        await user.save()
+
+        return res.status(200).json({ success: true, message: 'Password changed!'})
+
+    }
+    catch(error){
+        return res.status(500).json({ success: false, message: error.message })
+    }
+
 }
