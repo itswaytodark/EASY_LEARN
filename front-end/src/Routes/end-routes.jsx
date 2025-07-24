@@ -7,6 +7,7 @@ import Ai_teacher_page from "@/pages/ai_teacher";
 import About_us_page from "@/pages/about_us";
 import CourseDetail from "@/pages/CourseDetail";
 import ForgetPassword from "@/pages/forgetPassword";
+import ResetPassword from "@/pages/resetPassword";
 
 const EndRoute = () => {
 
@@ -22,6 +23,7 @@ const EndRoute = () => {
       <Route path="/AboutUs" element={<About_us_page/>} />
       <Route path={`/Courses/:id`} element={<CourseDetail/>}/>
       <Route path={"/forgot-password"} element={<ForgetPassword/>}/>
+      <Route path={"/reset-password/:token"} element={<ResetPassword/>}/>
       
       </Route>
     </Routes>
