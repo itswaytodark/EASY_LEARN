@@ -1,3 +1,4 @@
+import { ToastContainer } from "react-toastify";
 import EndRoute from "./Routes/end-routes";
 
 function App() {
@@ -5,7 +6,7 @@ function App() {
     <>
     
     <EndRoute/>
-    
+    <ToastContainer/>
     </>
   );
 }
