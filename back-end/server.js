@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 
 import connectDb from './config/MongoDb.js'
 import authRouter from './routes/authRoutes.js'
+import blogRouter from './routes/blogroutes.js'
 
 const PORT = process.env.PORT || 4000
 connectDb()
@@ -16,6 +17,7 @@ app.use(express.json())
 
 //Api Routes
 app.use('/api/auth',authRouter)
+app.use('/api/blog',blogRouter)
 
 
 app.listen(PORT, () => {
