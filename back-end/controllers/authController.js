@@ -258,21 +258,19 @@ export const resetPassword = async(req,res) => {
 
     const {token} = req.params
     const {newPassword} = req.body
+    
 
     try{
         const tokenDecode = jwt.verify(token , JWT_SECRET)
-        const user = await userModel.findById(tokenDecode.id)
+
+        const hashPassword = await bcrypt.hash(newPassword , 10)
+
+        const user = await userModel.findOneAndUpdate({_id: tokenDecode.id},{password: hashPassword})
 
         if(!user)
         {
             return res.status(400).json({ message: "User not found" });
         }
-
-        const hashPassword = await bcrypt.hash(newPassword , 10)
-
-        user.password = hashPassword
-
-        await user.save()
 
         return res.status(200).json({ success: true, message: 'Password changed!'})
 
@@ -281,4 +279,15 @@ export const resetPassword = async(req,res) => {
         return res.status(500).json({ success: false, message: error.message })
     }
 
+}
+
+export const isAuth = async(req,res) => {
+    try{
+        return res.status(200).json({ success: true})
+    }
+    catch(error)
+    {
+        return res.status(500).json({ success: false, message: error.message })
+
+    }
 }

@@ -1,5 +1,5 @@
 import express from 'express'
-import { forgotPassword, login, logout, register, resetPassword, sendverifyOtp, verifyEmail } from '../controllers/authController.js'
+import { forgotPassword, isAuth, login, logout, register, resetPassword, sendverifyOtp, verifyEmail } from '../controllers/authController.js'
 import { userAuth } from '../middelware/userAuth.js'
 
 const authRouter = express.Router()
@@ -9,7 +9,10 @@ authRouter.post('/login', login)
 authRouter.post('/logout', logout)
 authRouter.post('/send-verify-otp',userAuth, sendverifyOtp)
 authRouter.post('/verify-email',userAuth, verifyEmail)
-authRouter.post('/reset-email',userAuth, forgotPassword)
-authRouter.post('/reset-password/:token',userAuth, resetPassword)
+
+authRouter.post('/reset-email', forgotPassword)
+authRouter.post('/reset-password/:token', resetPassword)
+
+authRouter.post('/is-auth',userAuth, isAuth)
 
 export default authRouter

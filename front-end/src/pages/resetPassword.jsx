@@ -14,7 +14,7 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const { token } = useParams();
 
-  const [password, setPassword] = useState("");
+  const [newPassword, setnewPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleReset = async (e) => {
@@ -23,7 +23,7 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${baseUrl}/api/auth/reset-password/${token}`, { password } );
+      const res = await axios.post(`${baseUrl}/api/auth/reset-password/${token}`, { newPassword } );
 
       toast.success(res.data.message || "Password reset successfully!");
       setTimeout(() => navigate("/"), 3000);
@@ -59,8 +59,8 @@ const ResetPassword = () => {
                 <Input
                   type="password"
                   placeholder="Enter new password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={newPassword}
+                  onChange={(e) => setnewPassword(e.target.value)}
                   className="bg-white/10"
                   required
                 />
