@@ -18,7 +18,7 @@ const EndRoute = () => {
 
       <Route path="/" element={<Home/>} />
       <Route path="/login" element={<Login_page/>} />
-      <Route path="/courses" element={<Courses/>} />
+      <Route path="/blogs" element={<Courses/>} />
       <Route path="/AITeacher" element={<Ai_teacher_page/>} />
       <Route path="/AboutUs" element={<About_us_page/>} />
       <Route path={`/Courses/:id`} element={<CourseDetail/>}/>

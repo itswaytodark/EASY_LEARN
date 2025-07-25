@@ -37,10 +37,10 @@ function Navbar() {
           <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
         </li>
         <li className="hover:text-gray-400 transition-colors px-5 py-2">
-          <Link to="/Courses" onClick={() => setIsOpen(false)}>Courses</Link>
+          <Link to="/blogs" onClick={() => setIsOpen(false)}>blogs</Link>
         </li>
         <li className="hover:text-gray-400 transition-colors px-5 py-2">
-          <Link to="/AITeacher" onClick={() => setIsOpen(false)}>AI Teacher</Link>
+          <Link to="/AITeacher" onClick={() => setIsOpen(false)}>AI BlogsBot</Link>
         </li>
         <li className="hover:text-gray-400 transition-colors px-5 py-2">
           <Link to="/AboutUs" onClick={() => setIsOpen(false)}>About Us</Link>

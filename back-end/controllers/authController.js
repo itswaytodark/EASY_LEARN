@@ -76,6 +76,12 @@ export const login = async(req,res) => {
     try{
         const user = await userModel.findOne({email})
 
+        const userData = {
+            name: user.name,
+            email: user.email,
+            
+        };
+
         if(!user){
         return res.status(400).json({ success: false, message: 'Invalid Email' })
         }
@@ -96,7 +102,7 @@ export const login = async(req,res) => {
 
         })
 
-        return res.status(201).json({success:true , message: 'Login Successfull'})
+        return res.status(201).json({success:true , message: 'Login Successfull' , user:userData})
 
 
     }

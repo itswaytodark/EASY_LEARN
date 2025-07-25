@@ -7,6 +7,8 @@ import { toast } from "react-toastify"
 import axios from "axios"  // Import axios
 import { useDispatch } from "react-redux"
 import { onLogin } from "@/REDUX/slices/isAuth"
+import { Link, useNavigate } from "react-router-dom";
+
 
 const Login_page = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" })
@@ -21,6 +23,7 @@ const Login_page = () => {
   const REGISTER_URL = `${baseUrl}/api/auth/register`
 
   const dispatch = useDispatch()
+  const nevigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -29,8 +32,13 @@ const Login_page = () => {
     try {
       const res = await axios.post(LOGIN_URL, loginData, {withCredentials: true} )
 
+      // console.log(res)
+      // console.log(res.data.user)
+
+      
       toast.success(res.data.message || "Login successful!")
-      dispatch(onLogin())
+      dispatch(onLogin(res.data.user))
+      nevigate('/')
 
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
@@ -102,6 +110,13 @@ const Login_page = () => {
                     className="bg-white/10"
                     required
                   />
+
+                  <p>
+                    <Link to="/forgot-password" className="text-sm text-blue-400 hover:underline">
+                    Forgot Password?
+                  </Link> 
+                  </p>
+                 
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}
                   </Button>

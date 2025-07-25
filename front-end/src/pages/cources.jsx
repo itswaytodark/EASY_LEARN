@@ -51,7 +51,7 @@ const Courses_page = () => {
 
     <div className="flex items-baseline gap-1">
         <h1 className="text-4xl font-bold mb-10 ">
-          Explore Our Courses
+          Explore Our Blogs
         </h1>
         <MoveDown strokeWidth={3}/>
     </div>
@@ -60,7 +60,7 @@ const Courses_page = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {courses.map((course, index) => (
         <Card
-        onClick={() => {navigate(`/Courses/${course.id}`)}}
+        onClick={() => {navigate(`/blogs/${course.id}`)}}
         key={index}
         className="bg-white/5 border border-white/10 backdrop-blur-xl text-white shadow-md flex flex-col"
         >
