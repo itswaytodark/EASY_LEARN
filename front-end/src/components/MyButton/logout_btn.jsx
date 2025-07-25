@@ -1,21 +1,41 @@
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button"
-import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { onLogout } from "../../REDUX/slices/isAuth"; 
+
 const Logout_btn = () => {
-    return (
-        <div className=" md:flex ml-auto">
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-          <Link to='/login'>
-          <Button
-          variant="outline"
-          >
-            Logout
-          </Button>
-          </Link>
-        
-      </div>
-    )
-}
+  const baseUrl = import.meta.env.VITE_BASE_URL
 
-export default Logout_btn
+
+  const handleLogout = async () => {
+    try {
+      
+      await axios.post(`${baseUrl}/api/auth/logout`, {}, { withCredentials: true });
+
+      
+      dispatch(onLogout());
+
+      
+      navigate('/login');
+    } catch (error) {
+      console.error("Logout failed:", error);
+      
+    }
+  };
+
+  return (
+    <div className="md:flex ml-auto">
+      <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2">
+        <LogOut size={18} />
+        Logout
+      </Button>
+    </div>
+  );
+};
+
+export default Logout_btn;

@@ -5,6 +5,8 @@ import { Button } from "../components/ui/button"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import axios from "axios"  // Import axios
+import { useDispatch } from "react-redux"
+import { onLogin } from "@/REDUX/slices/isAuth"
 
 const Login_page = () => {
   const [loginData, setLoginData] = useState({ email: "", password: "" })
@@ -12,11 +14,13 @@ const Login_page = () => {
   const [isNewUser, setIsNewUser] = useState(false)
 
   const [loading, setLoading] = useState(false)
-
   const baseUrl = import.meta.env.VITE_BASE_URL
+
 
   const LOGIN_URL = `${baseUrl}/api/auth/login`
   const REGISTER_URL = `${baseUrl}/api/auth/register`
+
+  const dispatch = useDispatch()
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -26,7 +30,7 @@ const Login_page = () => {
       const res = await axios.post(LOGIN_URL, loginData, {withCredentials: true} )
 
       toast.success(res.data.message || "Login successful!")
-      
+      dispatch(onLogin())
 
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {

@@ -1,20 +1,33 @@
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button"
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { onLogout } from "../../REDUX/slices/isAuth"; // adjust import path if needed
+import Logout_btn from "./logout_btn";
+
 const Login_btn = () => {
+  const isAuth = useSelector((state) => state.isAuth.isAuth);
+  const dispatch = useDispatch();
+
+  
+  const handleLogout = () => {
+    dispatch(onLogout());
+  };
+
+  if (isAuth) {
     return (
-        <div className=" md:flex ml-auto">
+      
+      <Logout_btn/>
+    );
+  }
 
-          <Link to='/login'>
-          <Button
-          variant="outline"
-          >
-            Login
-          </Button>
-          </Link>
-        
-      </div>
-    )
-}
+  // If not logged in, show Login button linking to /login
+  return (
+    <div className="md:flex ml-auto">
+      <Link to="/login">
+        <Button variant="outline">Login</Button>
+      </Link>
+    </div>
+  );
+};
 
-export default Login_btn
+export default Login_btn;
