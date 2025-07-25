@@ -37,7 +37,12 @@ const Login_page = () => {
 
       
       toast.success(res.data.message || "Login successful!")
+
       dispatch(onLogin(res.data.user))
+      
+      localStorage.setItem('authUser', JSON.stringify(res.data.user));
+      localStorage.setItem('isAuth', 'true');
+
       nevigate('/')
 
     } catch (err) {

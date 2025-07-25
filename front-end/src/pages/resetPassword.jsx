@@ -23,10 +23,12 @@ const ResetPassword = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${baseUrl}/api/auth/reset-password/${token}`, { newPassword } );
+      const res = await axios.post(`${baseUrl}/api/auth/reset-password/${token}`, { newPassword }, {withCredentials:true} );
 
       toast.success(res.data.message || "Password reset successfully!");
-      setTimeout(() => navigate("/"), 3000);
+      localStorage.removeItem('authUser');
+      localStorage.removeItem('isAuth');
+      // setTimeout(() => navigate("/"), 3000);
 
     } catch (error) {
       toast.error(

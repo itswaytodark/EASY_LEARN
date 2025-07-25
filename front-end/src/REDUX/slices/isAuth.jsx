@@ -1,12 +1,15 @@
 // authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
+const storedUser = localStorage.getItem('authUser');
+const storedIsAuth = localStorage.getItem('isAuth') === 'true';
+
 const isAuthSlice = createSlice({
   name: "isAuthSlice",
-
+  
   initialState: {
-    isAuth: false,
-    user:{}
+    isAuth: storedIsAuth || false,
+    user: storedUser ? JSON.parse(storedUser) : {},
   },
   reducers: {
     onLogin(state, action) {

@@ -1,5 +1,5 @@
 import Background from "../components/ui/background";
-import { GraduationCap, Users, Briefcase, BookOpen, Clock, MessageCircle   } from "lucide-react";
+import { GraduationCap, Users, BookOpen, Clock, MessageCircle ,Heart   } from "lucide-react";
 import Courses_btn from "@/components/MyButton/Courses";
 import { useSelector } from "react-redux";
 
@@ -30,21 +30,21 @@ function Home() {
           <Courses_btn/>
 
 
-          <div className="mt-20 flex gap-8 justify-center items-center text-white">
+          <div className="mt-20 flex gap-7 justify-center items-center text-white">
             <div className="flex flex-col items-center">
-              <GraduationCap className="w-10 h-10 mb-2 text-emerald-400" />
-              <p className="text-2xl font-bold">12,000+</p>
-              <p className="text-sm text-gray-300">Students Taught</p>
+              <BookOpen className="w-10 h-10 mb-2 text-emerald-400" />
+              <p className="text-2xl font-bold">15,000+</p>
+              <p className="text-sm text-gray-300">Blogs Published</p>
             </div>
             <div className="flex flex-col items-center">
               <Users className="w-10 h-10 mb-2 text-cyan-400" />
-              <p className="text-2xl font-bold">85+</p>
-              <p className="text-sm text-gray-300">Expert Instructors</p>
+              <p className="text-2xl font-bold">10,000+</p>
+              <p className="text-sm text-gray-300">Writers & Readers</p>
             </div>
             <div className="flex flex-col items-center">
-              <Briefcase className="w-10 h-10 mb-2 text-indigo-400" />
-              <p className="text-2xl font-bold">1,200+</p>
-              <p className="text-sm text-gray-300">Jobs Secured</p>
+              <Heart  className="w-10 h-10 mb-2 text-indigo-400" />
+              <p className="text-2xl font-bold">500,000+</p>
+              <p className="text-sm text-gray-300">Stories Shared</p>
             </div>
           </div>
 

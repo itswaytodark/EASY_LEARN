@@ -21,7 +21,7 @@ const EndRoute = () => {
       <Route path="/blogs" element={<Courses/>} />
       <Route path="/AITeacher" element={<Ai_teacher_page/>} />
       <Route path="/AboutUs" element={<About_us_page/>} />
-      <Route path={`/Courses/:id`} element={<CourseDetail/>}/>
+      <Route path={`/blogs/:id`} element={<CourseDetail/>}/>
       <Route path={"/forgot-password"} element={<ForgetPassword/>}/>
       <Route path={"/reset-password/:token"} element={<ResetPassword/>}/>
       

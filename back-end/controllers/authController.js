@@ -278,6 +278,13 @@ export const resetPassword = async(req,res) => {
             return res.status(400).json({ message: "User not found" });
         }
 
+       res.clearCookie('token', {
+  httpOnly: true,
+  secure: NODE_ENV === 'production',
+  sameSite: 'lax',
+  path: '/',
+});
+
         return res.status(200).json({ success: true, message: 'Password changed!'})
 
     }
@@ -285,15 +292,4 @@ export const resetPassword = async(req,res) => {
         return res.status(500).json({ success: false, message: error.message })
     }
 
-}
-
-export const isAuth = async(req,res) => {
-    try{
-        return res.status(200).json({ success: true})
-    }
-    catch(error)
-    {
-        return res.status(500).json({ success: false, message: error.message })
-
-    }
 }

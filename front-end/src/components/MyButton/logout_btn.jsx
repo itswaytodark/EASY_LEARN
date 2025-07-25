@@ -19,6 +19,8 @@ const Logout_btn = () => {
 
       
       dispatch(onLogout());
+      localStorage.removeItem('authUser');
+      localStorage.removeItem('isAuth');
 
       
       navigate('/login');
