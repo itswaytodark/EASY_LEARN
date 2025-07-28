@@ -5,8 +5,13 @@ export const createBlog = async (req, res) => {
   try {
     const { image, title, description, link, details } = req.body;
 
+    const userId = req.user.id
+    
+    if (!userId) {
+      return res.status(401).json({ message: "User not authenticated" });
+    }
 
-    const newBlog = new blogModel({ image, title, description, link, details });
+    const newBlog = new blogModel({ image, title, description, link, details , owner: userId });
 
     await newBlog.save();
 
@@ -59,5 +64,15 @@ export const updateBlog = async (req, res) => {
     
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+export const getBlogs = async (req, res) => {
+  try {
+    const blogs = await blogModel.find().populate('owner', 'name email -_id')
+
+    res.status(200).json({status:'success', blogs })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
   }
 };

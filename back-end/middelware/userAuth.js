@@ -17,7 +17,8 @@ import { JWT_SECRET } from '../config/envConfig.js'
 
         if (tokenDecode){
 
-           req.user =  { id: tokenDecode.id } 
+           req.user =  { id: tokenDecode.id} 
+           
         }
         else
         {
