@@ -10,6 +10,7 @@ import ForgetPassword from "@/pages/forgetPassword";
 import ResetPassword from "@/pages/resetPassword";
 import LikedBlogs from "@/pages/likedBlogs";
 import VerifyOtpForm from "@/components/MyButton/VerifyOtpForm";
+import CreateBlogForm from "@/components/MyButton/CreateBlogForm";
 
 const EndRoute = () => {
 
@@ -22,6 +23,7 @@ const EndRoute = () => {
       <Route path="/liked-blogs" element={<LikedBlogs/>} />
       <Route path="/login" element={<Login_page/>} />
       <Route path="/blogs" element={<Courses/>} />
+      <Route path="/upload-blog" element={<CreateBlogForm/>} />
       <Route path="/AITeacher" element={<Ai_teacher_page/>} />
       <Route path="/AboutUs" element={<About_us_page/>} />
       <Route path="/Verify-email-otp" element={<VerifyOtpForm/>} />

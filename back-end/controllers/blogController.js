@@ -8,9 +8,9 @@ export const createBlog = async (req, res) => {
     // Upload image to Cloudinary if present
     let imageUrl = "";
 
-    console.log("Headers:", req.headers['content-type']);
-console.log("Body:", req.body);
-console.log("File:", req.file);
+//     console.log("Headers:", req.headers['content-type']);
+// console.log("Body:", req.body);
+// console.log("File:", req.file);
 
     if (req.file) {
       const uploadFromBuffer = (buffer) => {
@@ -100,5 +100,20 @@ export const getBlogs = async (req, res) => {
     res.status(200).json({status:'success', blogs })
   } catch (error) {
     res.status(500).json({ message: error.message })
+  }
+};
+
+export const getSingleBlog = async (req, res) => {
+  try {
+    const blog = await blogModel.findById(req.params.id);
+
+    if (!blog) {
+      return res.status(404).json({ success: false, message: "Blog not found" });
+    }
+
+    res.status(200).json({ success: true, blog });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };

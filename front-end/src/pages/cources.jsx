@@ -1,48 +1,46 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { Heart, MoveDown } from "lucide-react";
 import { Card, CardContent } from "../components/ui/card";
 import Background from "../components/ui/background";
-import { Heart, MoveDown } from 'lucide-react';
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { likeBlog, unlikeBlog } from '../REDUX/slices/isLiked';
-
-const courses = [
-  {
-    title: "React for Beginners",
-    description: "Master the fundamentals of React with hands-on examples.",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80",
-    price: "799",
-    id: 'reactDetailPage'
-  },
-  {
-    title: "Full Stack Web Dev",
-    description: "Build real-world apps with MERN stack from scratch.",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=800&q=80",
-    price: "1499",
-    id: 'FullStackWebDevDetailPage'
-  },
-  {
-    title: "AI with Python",
-    description: "Learn machine learning and AI using Python and real projects.",
-    image: "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=800&q=80",
-    price: "1199",
-    id: 'AIwithPythonDetailPage'
-  },
-];
+import { likeBlog, unlikeBlog } from "../REDUX/slices/isLiked";
 
 const Courses_page = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const likedBlogs = useSelector(state => state.likedBlog.blogItem);
+  const likedBlogs = useSelector((state) => state.likedBlog.blogItem);
+  const [blogs, setBlogs] = useState([]);
 
-  const isLiked = (id) => likedBlogs.some(item => item.id === id);
+  const isLiked = (id) => likedBlogs.some(item => item._id === id);
 
-  const handleToggleLike = (course) => {
-    if (isLiked(course.id)) {
-      dispatch(unlikeBlog(course));
-    } else {
-      dispatch(likeBlog(course));
-    }
-  };
+
+ const handleToggleLike = (blog) => {
+  if (isLiked(blog._id)) {
+    dispatch(unlikeBlog(blog));
+  } else {
+    dispatch(likeBlog(blog));
+  }
+};
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/api/blogs/blogs`,
+          { withCredentials: true }
+        );
+        console.log(res);
+        
+        setBlogs(res.data.blogs || []);
+      } catch (err) {
+        console.error("Failed to fetch blogs:", err);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden text-white">
@@ -57,35 +55,37 @@ const Courses_page = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {courses.map((course, index) => (
+          {blogs.map((blog) => (
             <Card
-              onClick={() => navigate(`/blogs/${course.id}`)}
-              key={index}
-              className="bg-white/5 border border-white/10 backdrop-blur-xl text-white shadow-md flex flex-col"
+              key={blog._id}
+              onClick={() => navigate(`/blogs/${blog._id}`)}
+              className="bg-white/5 border border-white/10 backdrop-blur-xl text-white shadow-md flex flex-col cursor-pointer"
             >
               <img
-                src={course.image}
-                alt={course.title}
-                className="w-full h-40 object-cover"
+                src={blog.image || "https://via.placeholder.com/400x200?text=No+Image"}
+                alt={blog.title}
+                className="w-full h-40 object-center rounded-t-md "
               />
 
               <CardContent className="p-4 flex flex-col justify-between grow">
                 <div>
-                  <h3 className="text-lg font-semibold">{course.title}</h3>
-                  <p className="text-sm text-white/70 line-clamp-3">{course.description}</p>
+                  <h3 className="text-lg font-semibold">{blog.title}</h3>
+                  <p className="text-sm text-white/70 line-clamp-3">{blog.description}</p>
                 </div>
+
+                <p className="text-gray-400 "> {blog.owner.name}</p>
 
                 <div className="flex items-center justify-between pt-4 mt-auto">
                   <button
                     onClick={(e) => {
-                      e.stopPropagation(); 
-                      handleToggleLike(course);
+                      e.stopPropagation();
+                      handleToggleLike(blog);
                     }}
                   >
                     <Heart
                       size={24}
-                      fill={isLiked(course.id) ? "#c084fc" : "none"} 
-                      color={isLiked(course.id) ? "#c084fc" : "gray"}
+                      fill={isLiked(blog._id) ? "#c084fc" : "none"}
+                      color={isLiked(blog._id) ? "#c084fc" : "gray"}
                       className="transition-colors hover:fill-purple-400 hover:text-purple-400 cursor-pointer"
                     />
                   </button>
