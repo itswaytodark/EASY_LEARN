@@ -3,7 +3,7 @@ import Background from "../components/ui/background";
 import { Heart, MoveDown } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { likeBlog, unlikeBlog } from '../redux/slices/isLiked';
+import { likeBlog, unlikeBlog } from '../REDUX/slices/isLiked';
 
 const courses = [
   {

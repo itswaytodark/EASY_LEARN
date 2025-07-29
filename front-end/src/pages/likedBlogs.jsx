@@ -3,7 +3,7 @@ import Background from "../components/ui/background";
 import { Heart } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { unlikeBlog } from '../redux/slices/isLiked';
+import { unlikeBlog } from '../REDUX/slices/isLiked';
 
 const LikedBlogs = () => {
   const navigate = useNavigate();
