@@ -8,6 +8,7 @@ import About_us_page from "@/pages/about_us";
 import CourseDetail from "@/pages/CourseDetail";
 import ForgetPassword from "@/pages/forgetPassword";
 import ResetPassword from "@/pages/resetPassword";
+import LikedBlogs from "@/pages/likedBlogs";
 
 const EndRoute = () => {
 
@@ -17,6 +18,7 @@ const EndRoute = () => {
       <Route element={<EndLayout />}>
 
       <Route path="/" element={<Home/>} />
+      <Route path="/liked-blogs" element={<LikedBlogs/>} />
       <Route path="/login" element={<Login_page/>} />
       <Route path="/blogs" element={<Courses/>} />
       <Route path="/AITeacher" element={<Ai_teacher_page/>} />

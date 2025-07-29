@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Menu, X, BrainCircuit } from "lucide-react";
+import { Menu, X, BrainCircuit, Heart } from "lucide-react";
 import { useState } from "react";
 import Login_btn from "./MyButton/login_btn";
+import LikedBlogsIcon from "./MyButton/LikedblogIcon";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ function Navbar() {
 
       
       <ul
-        className={`flex flex-col md:flex-row text-2xl sm:text-[17px]   md:justify-evenly flex-1 absolute md:static left-0 top-16 md:top-0 p-6 md:p-0 w-full md:w-auto bg-gray-900 md:bg-transparent transition-all duration-500 ease-in-out 
+        className={`flex flex-col md:flex-row text-2xl sm:text-[17px] items-baseline  md:justify-evenly flex-1 absolute md:static left-0 top-16 md:top-0 p-6 md:p-0 w-full md:w-auto bg-gray-900 md:bg-transparent transition-all duration-500 ease-in-out 
         ${isOpen ? "flex" : "hidden md:flex"}`}
       >
         <li className="hover:text-gray-400 transition-colors px-5 py-2">
@@ -45,12 +46,22 @@ function Navbar() {
         <li className="hover:text-gray-400 transition-colors px-5 py-2">
           <Link to="/AboutUs" onClick={() => setIsOpen(false)}>About Us</Link>
         </li>
+
+        <li>
+           <Link to="/liked-blogs" onClick={() => setIsOpen(false)}><LikedBlogsIcon/></Link>
+        </li>
+
         <li className="px-5 py-2">
         <div onClick={() => setIsOpen(false)}>
           <Login_btn />
           </div> 
         </li>
+
+          
+
       </ul>
+
+      
 
     
     </nav>
