@@ -9,6 +9,7 @@ import CourseDetail from "@/pages/CourseDetail";
 import ForgetPassword from "@/pages/forgetPassword";
 import ResetPassword from "@/pages/resetPassword";
 import LikedBlogs from "@/pages/likedBlogs";
+import VerifyOtpForm from "@/components/MyButton/VerifyOtpForm";
 
 const EndRoute = () => {
 
@@ -23,6 +24,7 @@ const EndRoute = () => {
       <Route path="/blogs" element={<Courses/>} />
       <Route path="/AITeacher" element={<Ai_teacher_page/>} />
       <Route path="/AboutUs" element={<About_us_page/>} />
+      <Route path="/Verify-email-otp" element={<VerifyOtpForm/>} />
       <Route path={`/blogs/:id`} element={<CourseDetail/>}/>
       <Route path={"/forgot-password"} element={<ForgetPassword/>}/>
       <Route path={"/reset-password/:token"} element={<ResetPassword/>}/>
