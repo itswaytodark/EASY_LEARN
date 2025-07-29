@@ -13,7 +13,7 @@ const LikedBlogs = () => {
   const handleUnlike = (blog) => {
     dispatch(unlikeBlog(blog));
   };
-
+  
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full -z-10">
