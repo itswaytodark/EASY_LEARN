@@ -2,13 +2,12 @@ import mongoose from "mongoose";
 
 const blogSchema = new mongoose.Schema({
 
-    image: {type:String },
+    image: {type:String, require:true },
 
     owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     
     title: {type:String, required:true, unique:true},
     description: {type:String, required:true},
-    link: {type:String, required:true, default:''},
     details: {type:String, required:true},
     
 })

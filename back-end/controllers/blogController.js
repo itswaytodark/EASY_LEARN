@@ -1,27 +1,53 @@
 import blogModel from '../Models/blog.models.js'; 
-
+import cloudinary from '../config/cloudinary.js';
 
 export const createBlog = async (req, res) => {
   try {
-    const { image, title, description, link, details } = req.body;
+    const { title, description, details } = req.body;
 
-    const userId = req.user.id
+    // Upload image to Cloudinary if present
+    let imageUrl = "";
+
+    console.log("Headers:", req.headers['content-type']);
+console.log("Body:", req.body);
+console.log("File:", req.file);
+
+    if (req.file) {
+      const uploadFromBuffer = (buffer) => {
+        return new Promise((resolve, reject) => {
+          const stream = cloudinary.uploader.upload_stream(
+            { folder: 'blog_images' },
+            (error, result) => {
+              if (error) return reject(error);
+              resolve(result.secure_url);
+              console.log( result);
+            }
+          );
+          stream.end(buffer);
+        });
+      };
+
+      imageUrl = await uploadFromBuffer(req.file.buffer);
+    }
     
+    console.log("Uploaded image URL:", imageUrl);
+
+    
+    const userId = req.user.id;
     if (!userId) {
       return res.status(401).json({ message: "User not authenticated" });
     }
 
-    const newBlog = new blogModel({ image, title, description, link, details , owner: userId });
-
+    // Create and save blog
+    const newBlog = new blogModel({ image: imageUrl, title, description, details, owner: userId });
     await newBlog.save();
 
     res.status(201).json({ message: "Blog created successfully", blog: newBlog });
-
   } catch (error) {
-      return res.status(400).json({ message: "Title must be unique" });
+    console.error("Create blog error: ", error);
+    res.status(400).json({ message: "Error creating blog", error: error.message });
   }
 };
-
 
 export const deleteBlog = async (req, res) => {
   try {
