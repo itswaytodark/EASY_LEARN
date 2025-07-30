@@ -51,7 +51,7 @@ const CourseDetail = () => {
       </div>
 
       {/* Hero Image */}
-      <div className="w-full h-[60vh] mt-28">
+      <div className="w-full h-[60vh] mt-20">
         <img
           src={blog.image || "https://via.placeholder.com/1200x600"}
           alt={blog.title}

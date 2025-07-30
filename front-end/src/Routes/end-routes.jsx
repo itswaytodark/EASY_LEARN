@@ -11,6 +11,7 @@ import ResetPassword from "@/pages/resetPassword";
 import LikedBlogs from "@/pages/likedBlogs";
 import VerifyOtpForm from "@/components/MyButton/VerifyOtpForm";
 import CreateBlogForm from "@/components/MyButton/CreateBlogForm";
+import ProfilePage from "@/pages/profilePage";
 
 
 const EndRoute = () => {
@@ -31,6 +32,7 @@ const EndRoute = () => {
       <Route path={`/blogs/:id`} element={<CourseDetail/>}/>
       <Route path={"/forgot-password"} element={<ForgetPassword/>}/>
       <Route path={"/reset-password/:token"} element={<ResetPassword/>}/>
+      <Route path={"/my-profile"} element={<ProfilePage/>}/>
       
       </Route>
     </Routes>

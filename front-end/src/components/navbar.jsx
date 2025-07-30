@@ -91,6 +91,9 @@ function Navbar() {
           <li>
             <Link to="/liked-blogs" onClick={() => setIsOpen(false)}><LikedBlogsIcon /></Link>
           </li>
+          <li>
+            <Link to="/my-profile" onClick={() => setIsOpen(false)}>My Profile</Link>
+          </li>
           <li className="px-5 py-2">
             <VerifyEmailBtn />
           </li>

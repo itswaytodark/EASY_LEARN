@@ -19,7 +19,7 @@ export const createBlog = async (req, res) => {
             (error, result) => {
               if (error) return reject(error);
               resolve(result.secure_url);
-              console.log( result);
+              // console.log( result);
             }
           );
           stream.end(buffer);
@@ -116,3 +116,38 @@ export const getSingleBlog = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+export const getUserBlogs = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const blogs = await blogModel.find({ owner: userId }).populate('owner', 'name email');
+
+    res.status(200).json({ success: true, blogs });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const deleteBlogById = async (req, res) => {
+  try {
+    const blogId = req.params.id;
+    const userId = req.user.id;
+
+    const blog = await blogModel.findById(blogId);
+
+    if (!blog) {
+      return res.status(404).json({ success: false, message: "Blog not found" });
+    }
+
+    if (blog.owner.toString() !== userId) {
+      return res.status(403).json({ success: false, message: "Unauthorized" });
+    }
+
+    await blog.deleteOne();
+    res.status(200).json({ success: true, message: "Blog deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+

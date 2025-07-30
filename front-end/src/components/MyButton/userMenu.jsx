@@ -8,7 +8,6 @@ import VerifyEmailBtn from "./VerifyEmailBtn";
 export default function UserMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const isVerified = useSelector((state) => state.isAuth.isVerified);
@@ -33,13 +32,16 @@ export default function UserMenu() {
       
           <div
               className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center cursor-pointer"
-              onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          setIsOpen(!isOpen);
+          navigate('/my-profile');
+        }}
               onMouseEnter={() => setIsOpen(true)}
           >
               {userName?.[0] ? (
                   <p className="text-black text-xl font-bold">{userName[0]}</p>
               ) : (
-                  <User className="text-black w-5 h-5" />
+                  <User className="text-black w-5 h-5"/>
               )}
           </div>
 
