@@ -30,7 +30,7 @@ const LikedBlogs = () => {
             {likedBlogs.map((blog, index) => (
               <Card
                 key={index}
-                onClick={() => navigate(`/blogs/${blog.id}`)}
+                onClick={() => navigate(`/blogs/${blog._id}`)}
                 className="bg-white/5 border border-white/10 backdrop-blur-xl text-white shadow-md flex flex-col"
               >
                 <img

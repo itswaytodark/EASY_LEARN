@@ -6,6 +6,7 @@ import Login_btn from "./MyButton/login_btn";
 import LikedBlogsIcon from "./MyButton/LikedblogIcon";
 import { useSelector } from "react-redux";
 import VerifyEmailBtn from "./MyButton/VerifyEmailBtn";
+import UserMenu from "./MyButton/userMenu";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,17 +42,22 @@ function Navbar() {
               <LikedBlogsIcon />
             </Link>
           </li>
+
           <li className="px-5 py-2">
-            <VerifyEmailBtn />
+            {/* <VerifyEmailBtn /> */}
           </li>
         </ul>
       </div>
 
+
+
       {/* Right side (Login & Mobile toggle) */}
       <div className="flex items-center gap-4 mx-4">
         <div className="hidden md:block text-right">
-          <p className="text-xs text-white/70 mb-1">{userEmail}</p>
-          <Login_btn />
+          {/* <p className="text-xs text-white/70 mb-1">{userEmail}</p> */}
+        
+          <UserMenu/>
+        
         </div>
 
         {/* Mobile Toggle */}
@@ -88,9 +94,11 @@ function Navbar() {
           <li className="px-5 py-2">
             <VerifyEmailBtn />
           </li>
-          <li>
+            
+          <li onClick={() => setIsOpen(false)}>
             <p className="text-xs text-white/70 mb-1">{userEmail}</p>
             <Login_btn />
+
           </li>
         </ul>
       )}

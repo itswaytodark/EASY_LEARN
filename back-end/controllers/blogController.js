@@ -5,10 +5,9 @@ export const createBlog = async (req, res) => {
   try {
     const { title, description, details } = req.body;
 
-    // Upload image to Cloudinary if present
     let imageUrl = "";
 
-//     console.log("Headers:", req.headers['content-type']);
+// console.log("Headers:", req.headers['content-type']);
 // console.log("Body:", req.body);
 // console.log("File:", req.file);
 
@@ -30,7 +29,7 @@ export const createBlog = async (req, res) => {
       imageUrl = await uploadFromBuffer(req.file.buffer);
     }
     
-    console.log("Uploaded image URL:", imageUrl);
+    // console.log("Uploaded image URL:", imageUrl);
 
     
     const userId = req.user.id;
