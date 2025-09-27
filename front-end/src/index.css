@@ -134,3 +134,24 @@ html, body, #root {
     @apply bg-background text-foreground;
   }
 }
+
+
+
+
+/* Hide scrollbars but keep scrolling */
+html, body, #root {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+  overflow-x: hidden;        /* prevent horizontal bar */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+#root::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+
+

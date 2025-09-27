@@ -7,7 +7,7 @@ import { toast } from "react-toastify"
 import axios from "axios"  // Import axios
 import { useDispatch } from "react-redux"
 import { onLogin } from "@/REDUX/slices/isAuth"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 
 const Login_page = () => {
@@ -65,6 +65,7 @@ const Login_page = () => {
       const res = await axios.post(REGISTER_URL, signupData,{withCredentials: true})
 
       toast.success(res.data.message || "Account created! Please log in.")
+      setIsNewUser(false)
       setSignupData({ name: "", email: "", password: "" })
 
     } catch (err) {

@@ -3,8 +3,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ImagePlus, Loader2 } from "lucide-react";
 import Background from "@/components/ui/background";
+import { useNavigate } from "react-router-dom";
 
 const CreateBlogForm = () => {
+
+  navigat = useNavigate()
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -38,6 +42,7 @@ const CreateBlogForm = () => {
     try {
       const res = await axios.post(`${baseUrl}/api/blogs/blog-create`, data, {withCredentials: true,headers: { "Content-Type": "multipart/form-data" },});
       toast.success(res.data.message);
+      navigat('/blogs')
       console.log(res);
       
     } catch (err) {
