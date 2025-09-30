@@ -6,6 +6,7 @@ import { Heart, MoveDown } from "lucide-react";
 import { Card, CardContent } from "../components/ui/card";
 import Background from "../components/ui/background";
 import { likeBlog, unlikeBlog } from "../REDUX/slices/isLiked";
+import { Link } from "react-router-dom";
 
 const Courses_page = () => {
   const navigate = useNavigate();
@@ -54,6 +55,12 @@ const Courses_page = () => {
           <MoveDown strokeWidth={3} />
         </div>
 
+      <Link to="/upload-blog">
+      <button className="text-2xl mb-5 py-3 w-38 bg-gradient-to-r from-purple-600 to-fuchsia-400 text-white font-bold uppercase shadow-lg hover:from-purple-700 hover:to-fuchsia-700 transition duration-300">
+          Upload
+        </button>
+      </Link>
+      
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <Card

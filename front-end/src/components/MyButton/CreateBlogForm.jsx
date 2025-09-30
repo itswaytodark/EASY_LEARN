@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateBlogForm = () => {
 
-  navigat = useNavigate()
+  const navigat = useNavigate()
 
   const [formData, setFormData] = useState({
     title: "",
