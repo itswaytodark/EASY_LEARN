@@ -1,69 +1,125 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Background from "../components/ui/background";
-import { CircleUser  } from "lucide-react"; // example avatar icon
+import { CalendarDays, Tag, User } from "lucide-react"; 
+import Background from "../components/ui/background"; // Re-imported Background
 
 const CourseDetail = () => {
-  const { id } = useParams();
-  const [blog, setBlog] = useState(null);
-  const [error, setError] = useState("");
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+    const { id } = useParams();
+    const [blog, setBlog] = useState(null);
+    const [error, setError] = useState("");
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const res = await axios.get(`${baseUrl}/api/blogs/blog/${id}`, {
-          withCredentials: true,
+    const formatDate = (dateString) => {
+        if (!dateString) return "N/A";
+        return new Date(dateString).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
         });
-        setBlog(res.data.blog);
-      } catch (err) {
-        setError("Blog not found or error occurred.");
-      }
     };
-    if (id) fetchBlog();
-  }, [id]);
 
-  if (error) return <div className="text-center text-red-500 mt-10">{error}</div>;
-  if (!blog) return <div className="text-center text-white/70 mt-10">Loading...</div>;
+    useEffect(() => {
+        const fetchBlog = async () => {
+            try {
+                const res = await axios.get(`${baseUrl}/api/blogs/blog/${id}`, {
+                    withCredentials: true,
+                });
+                setBlog(res.data.blog);
+            } catch (err) {
+                console.error("Failed to fetch blog:", err);
+                setError("Oops! We couldn't find that blog or something went wrong.");
+            }
+        };
+        if (id) fetchBlog();
+    }, [id, baseUrl]);
 
-  
-  return (
-    <div className="relative min-h-screen overflow-hidden text-white">
-      <div className="absolute inset-0 -z-10"><Background /></div>
-
-      <div className="flex justify-center py-10 px-2 sm:px-0">
-        <div className="w-full max-w-xl bg-white/5 rounded-xl shadow-lg border border-white/10 p-0 sm:p-0 mt-16">
-          
-          {/* Image */}
-          {blog.image && (
-            <img
-              className="w-full max-h-96 object-contain bg-black rounded-t-md"
-              src={blog.image}
-              alt={blog.title}
-            />
-          )}
-          {/* Post Content */}
-          <div className="p-5">
-            <h1 className="text-2xl font-bold mb-2 text-white">{blog.title}</h1>
-            <div className="text-white/80 text-base leading-relaxed mb-3">
-              {blog.description &&
-                blog.description.split('\n').map((para, idx) => (
-                  <p className="mb-3 last:mb-0" key={idx}>{para}</p>
-                ))}
+    // --- Loading and Error States ---
+    if (error)
+        return (
+            <div className="min-h-screen pt-40 flex items-center justify-center bg-background text-center text-destructive font-semibold text-xl">
+                {error}
             </div>
-            {/* Details or more info */}
-            {blog.details && (
-              <div className="mt-4 py-3 px-4 bg-white/10 rounded">
-                <span className="text-sm text-gray-200">{blog.details}</span>
-              </div>
-            )}
-           
-          </div>
+        );
+    if (!blog)
+        return (
+            <div className="min-h-screen pt-40 flex items-center justify-center bg-background text-center text-secondary-foreground text-xl animate-pulse">
+                Fetching your story...
+            </div>
+        );
+
+    return (
+        // Main container uses theme background and is scrollable
+        <div className="min-h-screen w-full relative overflow-hidden bg-background text-foreground">
+            
+            {/* Background Component: Fixed and low z-index for the Aurora effect */}
+            <Background />
+
+            {/* Centering wrapper with ample vertical padding - Needs z-index to float above BG */}
+            <div className="relative z-10 flex justify-center py-10 px-4 sm:px-0 pt-24">
+                
+                {/* --- Main Post Card Container --- */}
+                <div className="w-full max-w-xl bg-card/90 backdrop-blur-lg rounded-xl shadow-2xl shadow-primary/20 border border-border mt-8">
+                    
+                    {/* Image */}
+                    {blog.image && (
+                        <img
+                            className="w-full max-h-96 object-cover bg-background rounded-t-xl"
+                            src={blog.image}
+                            alt={blog.title}
+                        />
+                    )}
+
+                    {/* --- Content and Metadata --- */}
+                    <div className="p-6 md:p-8">
+                        
+                        {/* Title */}
+                        <h1 className="text-3xl md:text-4xl font-extrabold mb-3 text-primary leading-tight">
+                            {blog.title}
+                        </h1>
+
+                        {/* Metadata Row: Owner & Date */}
+                        <div className="flex items-center space-x-4 mb-6 text-sm text-secondary-foreground border-b border-border pb-4">
+                            {/* Owner */}
+                            {blog.owner?.name && (
+                                <div className="flex items-center space-x-2">
+                                    <User className="w-4 h-4 text-accent" />
+                                    <span className="font-medium">{blog.owner.name}</span>
+                                </div>
+                            )}
+
+                            {/* Date */}
+                            <div className="flex items-center space-x-2">
+                                <CalendarDays className="w-4 h-4 text-accent" />
+                                <span>{formatDate(blog.createdAt)}</span>
+                            </div>
+                        </div>
+                        
+                        {/* Main Content */}
+                        <div className="text-foreground text-base leading-relaxed space-y-5">
+                            {/* The description should render content safely */}
+                            {blog.description &&
+                                blog.description.split('\n').map((para, idx) => (
+                                    <p key={idx} className="mb-0 last:mb-0">
+                                        {para}
+                                    </p>
+                                ))}
+                        </div>
+                        
+                        {/* Additional Details (Tags/Categories) */}
+                        {blog.details && (
+                            <div className="mt-6 py-3 px-4 bg-background/50 border border-border rounded flex items-center space-x-3">
+                                <Tag className="w-5 h-5 text-accent" />
+                                <span className="text-sm font-medium text-secondary-foreground">{blog.details}</span>
+                            </div>
+                        )}
+                        
+                    </div>
+                </div>
+            </div>
+            <div className="h-20"></div> {/* Bottom padding */}
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default CourseDetail;

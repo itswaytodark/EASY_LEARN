@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Marcellus&display=swap');
 
-
-
-
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -14,9 +11,9 @@ html, body, #root {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  
 }
 
+/* @theme inline block remains unchanged, linking utility vars to core vars */
 @theme inline {
   --font-Inter: Inter;
   --radius-sm: calc(var(--radius) - 4px);
@@ -56,74 +53,102 @@ html, body, #root {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* --- LIGHT THEME (Default) --- */
 :root {
-  
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  
+  /* Backgrounds & Text */
+  --background: oklch(0.99 0.005 260); /* Very light off-white/grey-blue */
+  --foreground: oklch(0.15 0.01 260); /* Very dark purple text */
+  --card: oklch(1 0 0); /* Pure White Card */
+  --card-foreground: oklch(0.15 0.01 260);
+  
+  /* Primary (Vibrant Purple/Pink Accent) */
+  --primary: oklch(0.55 0.19 320); /* Mid-tone Fuchsia */
+  --primary-foreground: oklch(0.98 0 0); /* Near White Text */
+  
+  /* Secondary (Muted Accent for Buttons/Elements) */
+  --secondary: oklch(0.9 0.04 290); /* Light Lavender */
+  --secondary-foreground: oklch(0.3 0.02 290); /* Darker Lavender Text */
+  
+  /* Borders & Rings */
+  --border: oklch(0.9 0.01 260);
+  --input: oklch(0.9 0.01 260);
+  --ring: oklch(0.55 0.19 320); /* Ring matches primary color */
+
+  /* Muted/Accent (For subtle elements) */
+  --muted: oklch(0.95 0.01 260);
+  --muted-foreground: oklch(0.6 0.01 260);
+  --accent: oklch(0.95 0.01 260);
+  --accent-foreground: oklch(0.3 0.02 290);
+
+  /* Destructive */
+  --destructive: oklch(0.6 0.25 25);
+  
+  /* Chart Colors (Vibrant/Complementary) */
+  --chart-1: oklch(0.65 0.2 40);   /* Orange */
+  --chart-2: oklch(0.5 0.15 180);  /* Cyan */
+  --chart-3: oklch(0.7 0.18 280);  /* Indigo */
+  --chart-4: oklch(0.8 0.1 110);   /* Lime */
+  --chart-5: oklch(0.5 0.2 340);   /* Rose */
+  
+  /* Sidebar (Kept close to main theme for modern feel) */
+  --sidebar: var(--card); 
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--secondary-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 }
 
+/* --- DARK THEME --- */
 .dark {
-  --background: oklch(0% 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Backgrounds & Text */
+  --background: oklch(0.1 0.005 260); /* Very dark blue/purple space-like */
+  --foreground: oklch(0.95 0.01 260); /* Light off-white text */
+  --card: oklch(0.18 0.01 260); /* Dark subtle purple card */
+  --card-foreground: oklch(0.95 0.01 260);
+  
+  /* Primary (Vibrant Purple/Pink Accent) */
+  --primary: oklch(0.65 0.18 320); /* Brighter Fuchsia */
+  --primary-foreground: oklch(0.1 0 0); /* Near Black Text */
+  
+  /* Secondary (Muted Accent for Buttons/Elements) */
+  --secondary: oklch(0.25 0.01 290); /* Darker Lavender */
+  --secondary-foreground: oklch(0.9 0.01 290); /* Lighter Lavender Text */
+  
+  /* Borders & Rings */
+  --border: oklch(0.2 0.01 260);
+  --input: oklch(0.2 0.01 260);
+  --ring: oklch(0.65 0.18 320); /* Ring matches primary color */
+
+  /* Muted/Accent (For subtle elements) */
+  --muted: oklch(0.2 0.01 260);
+  --muted-foreground: oklch(0.7 0.01 260);
+  --accent: oklch(0.25 0.01 260);
+  --accent-foreground: oklch(0.9 0.01 290);
+
+  /* Destructive */
+  --destructive: oklch(0.7 0.25 25);
+
+  /* Chart Colors */
+  --chart-1: oklch(0.75 0.2 40);
+  --chart-2: oklch(0.6 0.15 180);
+  --chart-3: oklch(0.8 0.18 280);
+  --chart-4: oklch(0.9 0.1 110);
+  --chart-5: oklch(0.6 0.2 340);
+
+  /* Sidebar */
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--secondary-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 }
 
 @layer base {
@@ -135,14 +160,11 @@ html, body, #root {
   }
 }
 
-
-
-
 /* Hide scrollbars but keep scrolling */
 html, body, #root {
-  -ms-overflow-style: none;  /* IE/Edge */
-  scrollbar-width: none;     /* Firefox */
-  overflow-x: hidden;        /* prevent horizontal bar */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: hidden;
 }
 
 html::-webkit-scrollbar,
@@ -152,6 +174,5 @@ body::-webkit-scrollbar,
   height: 0;
   background: transparent;
 }
-
 
 

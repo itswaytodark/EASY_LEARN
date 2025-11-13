@@ -31,9 +31,9 @@ function Navbar() {
           <li className="hover:text-gray-400">
             <Link to="/blogs" onClick={() => setIsOpen(false)}>Blogs</Link>
           </li>
-          <li className="hover:text-gray-400">
+          {/* <li className="hover:text-gray-400">
             <Link to="/AITeacher" onClick={() => setIsOpen(false)}>AI BlogsBot</Link>
-          </li>
+          </li> */}
           <li className="hover:text-gray-400">
             <Link to="/AboutUs" onClick={() => setIsOpen(false)}>About Us</Link>
           </li>
@@ -82,9 +82,9 @@ function Navbar() {
           <li>
             <Link to="/blogs" onClick={() => setIsOpen(false)}>Blogs</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to="/AITeacher" onClick={() => setIsOpen(false)}>AI BlogsBot</Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/AboutUs" onClick={() => setIsOpen(false)}>About Us</Link>
           </li>

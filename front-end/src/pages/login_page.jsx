@@ -4,10 +4,10 @@ import { Input } from "../components/ui/input"
 import { Button } from "../components/ui/button"
 import { useState } from "react"
 import { toast } from "react-toastify"
-import axios from "axios"  // Import axios
+import axios from "axios"
 import { useDispatch } from "react-redux"
 import { onLogin } from "@/REDUX/slices/isAuth"
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Login_page = () => {
@@ -23,27 +23,23 @@ const Login_page = () => {
   const REGISTER_URL = `${baseUrl}/api/auth/register`
 
   const dispatch = useDispatch()
-  const nevigate = useNavigate()
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
     setLoading(true)
 
     try {
-      const res = await axios.post(LOGIN_URL, loginData, {withCredentials: true} )
+      const res = await axios.post(LOGIN_URL, loginData, { withCredentials: true })
 
-      // console.log(res)
-      // console.log(res.data.user)
-
-      
       toast.success(res.data.message || "Login successful!")
 
       dispatch(onLogin(res.data.user))
-      
+
       localStorage.setItem('authUser', JSON.stringify(res.data.user));
       localStorage.setItem('isAuth', 'true');
 
-      nevigate('/')
+      navigate('/')
 
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {
@@ -62,7 +58,7 @@ const Login_page = () => {
     setLoading(true)
 
     try {
-      const res = await axios.post(REGISTER_URL, signupData,{withCredentials: true})
+      const res = await axios.post(REGISTER_URL, signupData, { withCredentials: true })
 
       toast.success(res.data.message || "Account created! Please log in.")
       setIsNewUser(false)
@@ -81,19 +77,22 @@ const Login_page = () => {
   }
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <Background />
-      </div>
+    <div className="relative min-h-screen w-full overflow-hidden bg-background text-foreground">
 
-      <div className="flex h-screen items-center justify-center w-full px-4 py-16 ">
-        <div className="max-w-md w-full text-white">
+      {/* FIX: Background Component called directly (fixed structure) */}
+      <Background />
+
+      <div className="flex h-screen items-center justify-center w-full px-4 py-16">
+        {/* Card wrapper */}
+        <div className="max-w-md w-full relative z-10">
+
+          {/* --- Conditional Rendering Block Start --- */}
           {!isNewUser ? (
-            <Card className="bg-white/5 border border-white/20 p-2">
-              <CardContent>
-                <h2 className="text-2xl font-semibold mb-1 text-center">Howdy!</h2>
-                <p className="text-center text-sm font-light text-gray-100 mb-5">
-                  LOGIN TO YOUR ACCOUNT HERE
+            <Card className="bg-white/5 border border-border shadow-2xl p-4 backdrop-blur-sm">
+              <CardContent className="p-4 md:p-6">
+                <h2 className="text-3xl font-bold mb-1 text-center text-primary">Welcome Back!</h2>
+                <p className="text-center text-sm font-medium text-muted-foreground mb-6">
+                  Log in to your account.
                 </p>
                 <form onSubmit={handleLogin} className="space-y-4">
                   <Input
@@ -103,7 +102,7 @@ const Login_page = () => {
                     onChange={(e) =>
                       setLoginData({ ...loginData, email: e.target.value })
                     }
-                    className="bg-white/10"
+                    className="bg-input/50 border-border text-foreground placeholder:text-muted-foreground"
                     required
                   />
                   <Input
@@ -113,26 +112,30 @@ const Login_page = () => {
                     onChange={(e) =>
                       setLoginData({ ...loginData, password: e.target.value })
                     }
-                    className="bg-white/10"
+                    className="bg-input/50 border-border text-foreground placeholder:text-muted-foreground"
                     required
                   />
 
                   <p>
-                    <Link to="/forgot-password" className="text-sm text-blue-400 hover:underline">
-                    Forgot Password?
-                  </Link> 
+                    <Link to="/forgot-password"
+                      // RESTORED ORIGINAL COLOR
+                      className="text-sm text-blue-400 hover:text-blue-500 hover:underline transition-colors"
+                    >
+                      Forgot Password?
+                    </Link>
                   </p>
-                 
+
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}
                   </Button>
                 </form>
-                <p className="text-sm text-center mt-2">
+                <p className="text-sm text-center mt-4 text-secondary-foreground">
                   New user?{" "}
                   <button
                     type="button"
                     onClick={() => setIsNewUser(true)}
-                    className="text-blue-400 underline cursor-pointer"
+                    // RESTORED ORIGINAL COLOR
+                    className=" text-blue-400 hover:text-blue-500 font-medium cursor-pointer transition-colors"
                   >
                     Sign Up
                   </button>
@@ -140,11 +143,12 @@ const Login_page = () => {
               </CardContent>
             </Card>
           ) : (
-            <Card className="bg-white/5 border border-white/20 p-2">
-              <CardContent>
-                <h2 className="text-2xl font-semibold mb-1 text-center">Create New Account</h2>
-                <p className="text-center text-sm font-light text-gray-100 mb-5">
-                  Sign-up Your Account
+            /* --- Signup Card --- */
+            <Card className="bg-card/90 border border-border shadow-2xl p-4 backdrop-blur-sm">
+              <CardContent className="p-4 md:p-6">
+                <h2 className="text-3xl font-bold mb-1 text-center text-primary">Create Account</h2>
+                <p className="text-center text-sm font-medium text-muted-foreground mb-6">
+                  Sign up to get started.
                 </p>
                 <form onSubmit={handleSignup} className="space-y-4">
                   <Input
@@ -154,7 +158,7 @@ const Login_page = () => {
                     onChange={(e) =>
                       setSignupData({ ...signupData, name: e.target.value })
                     }
-                    className="bg-white/10"
+                    className="bg-input/50 border-border text-foreground placeholder:text-muted-foreground"
                     required
                   />
                   <Input
@@ -164,7 +168,7 @@ const Login_page = () => {
                     onChange={(e) =>
                       setSignupData({ ...signupData, email: e.target.value })
                     }
-                    className="bg-white/10"
+                    className="bg-input/50 border-border text-foreground placeholder:text-muted-foreground"
                     required
                   />
                   <Input
@@ -174,19 +178,20 @@ const Login_page = () => {
                     onChange={(e) =>
                       setSignupData({ ...signupData, password: e.target.value })
                     }
-                    className="bg-white/10"
+                    className="bg-input/50 border-border text-foreground placeholder:text-muted-foreground"
                     required
                   />
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? "Signing up..." : "Sign Up"}
                   </Button>
                 </form>
-                <p className="text-sm text-center mt-2">
+                <p className="text-sm text-center mt-4 text-secondary-foreground">
                   Already have an account?{" "}
                   <button
                     type="button"
                     onClick={() => setIsNewUser(false)}
-                    className="text-blue-400 underline cursor-pointer"
+                    // RESTORED ORIGINAL COLOR
+                    className=" text-blue-400 hover:text-blue-500 underline font-medium cursor-pointer transition-colors"
                   >
                     Login
                   </button>
